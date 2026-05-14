@@ -1,0 +1,21 @@
+# Node
+node_modules/
+.next/
+dist/
+build/
+
+# Env / secrets
+.env
+.env.local
+.env*.local
+
+# OS
+.DS_Store
+
+# Editor
+.vscode/
+*.swp
+
+# Logs
+*.log
+npm-debug.log*
