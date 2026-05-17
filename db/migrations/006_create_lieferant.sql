@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS lieferant CASCADE;
+
+CREATE TABLE lieferant (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL UNIQUE,
+    kontakt TEXT,
+    telefon TEXT
+);

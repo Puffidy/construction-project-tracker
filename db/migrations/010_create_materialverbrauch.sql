@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS materialverbrauch CASCADE;C
+
+REATE TABLE materialverbrauch (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    baustelle_id BIGINT NOT NULL REFERENCES baustelle(id) ON DELETE CASCADE,
+    material_id BIGINT NOT NULL REFERENCES material(id) ON DELETE RESTRICT,
+    menge NUMERIC(10,2) NOT NULL CHECK (menge > 0),
+    datum DATE NOT NULL,
+    vorgefertigt BOOLEAN NOT NULL DEFAULT FALSE
+);

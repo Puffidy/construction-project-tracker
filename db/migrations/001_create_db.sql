@@ -1,0 +1,1 @@
+CREATE DATABASE construction_project_tracker;
