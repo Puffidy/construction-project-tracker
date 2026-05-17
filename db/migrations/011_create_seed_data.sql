@@ -1,6 +1,3 @@
--- ------------------------------------------------------------
--- KUNDEN
--- ------------------------------------------------------------
 INSERT INTO kunde (name, kontakt, email, telefon) VALUES
 ('Migros Aare Genossenschaft',   'Daniela Frei',    'd.frei@migrosaare.ch',     '+41 62 123 45 67'),
 ('Coop Genossenschaft Region AG','Markus Huber',    'm.huber@coop.ch',          '+41 62 234 56 78'),
@@ -9,9 +6,6 @@ INSERT INTO kunde (name, kontakt, email, telefon) VALUES
 ('Immobilien Treuhand Schmid',   'Thomas Schmid',   't.schmid@itschmid.ch',     '+41 62 567 89 01');
 
 
--- ------------------------------------------------------------
--- PROJEKTE
--- ------------------------------------------------------------
 INSERT INTO projekt (kunde_id, name, start_datum, end_geplant, budget_chf, status) VALUES
 (1, 'Migros Filiale Aarau Telli - Umbau',         '2025-09-01', '2026-06-30',  480000.00, 'aktiv'),
 (1, 'Migros Verteilzentrum Suhr - Erweiterung',   '2025-06-15', '2026-03-31',  920000.00, 'aktiv'),
@@ -27,9 +21,6 @@ INSERT INTO projekt (kunde_id, name, start_datum, end_geplant, budget_chf, statu
 (5, 'EFH Buchs - Neubau Elektro',                 '2025-08-15', '2026-02-28',   75000.00, 'aktiv');
 
 
--- ------------------------------------------------------------
--- BAUSTELLEN
--- ------------------------------------------------------------
 INSERT INTO baustelle (projekt_id, bezeichnung, adresse, plz, ort, status) VALUES
 (1, 'Telli - Verkaufsfläche EG',     'Tellistrasse 88',     '5004', 'Aarau',     'aktiv'),
 (1, 'Telli - Lager UG',              'Tellistrasse 88',     '5004', 'Aarau',     'aktiv'),
@@ -63,9 +54,6 @@ INSERT INTO baustelle (projekt_id, bezeichnung, adresse, plz, ort, status) VALUE
 (12,'EFH Buchs - Obergeschoss',      'Hofweg 3',            '5033', 'Buchs',     'aktiv');
 
 
--- ------------------------------------------------------------
--- MITARBEITER
--- ------------------------------------------------------------
 INSERT INTO mitarbeiter (vorname, nachname, rolle, stundensatz_chf, aktiv, eintritt) VALUES
 ('Stefan',   'Bürgi',       'projektleiter', 145.00, TRUE,  '2018-03-01'),
 ('Andrea',   'Wyss',        'projektleiter', 142.00, TRUE,  '2020-09-15'),
@@ -84,9 +72,6 @@ INSERT INTO mitarbeiter (vorname, nachname, rolle, stundensatz_chf, aktiv, eintr
 ('Roger',    'Kunz',        'elektriker',    103.00, FALSE, '2014-02-01');
 
 
--- ------------------------------------------------------------
--- LIEFERANTEN
--- ------------------------------------------------------------
 INSERT INTO lieferant (name, kontakt, telefon) VALUES
 ('Otto Fischer AG',          'Verkauf Aargau',     '+41 44 444 50 50'),
 ('Elektro-Material AG',      'Niederlassung Aarau','+41 62 837 12 12'),
@@ -98,9 +83,6 @@ INSERT INTO lieferant (name, kontakt, telefon) VALUES
 ('Demelectric AG',           'Verkauf',            '+41 44 925 11 11');
 
 
--- ------------------------------------------------------------
--- MATERIAL
--- ------------------------------------------------------------
 INSERT INTO material (bezeichnung, einheit, preis_chf, vorfertigung_faehig) VALUES
 ('NYM-J 3x1.5mm² Installationskabel',         'm',    1.85, FALSE),
 ('NYM-J 3x2.5mm² Installationskabel',         'm',    2.60, FALSE),
@@ -129,9 +111,6 @@ INSERT INTO material (bezeichnung, einheit, preis_chf, vorfertigung_faehig) VALU
 ('Kabelkanal 60x40mm weiss',                  'm',    8.50, FALSE);
 
 
--- ------------------------------------------------------------
--- MATERIAL_LIEFERANT
--- ------------------------------------------------------------
 INSERT INTO material_lieferant (material_id, lieferant_id, preis_chf) VALUES
 (1,1,1.85),(1,2,1.92),(1,4,1.88),
 (2,1,2.60),(2,2,2.65),(2,4,2.58),
@@ -160,9 +139,6 @@ INSERT INTO material_lieferant (material_id, lieferant_id, preis_chf) VALUES
 (25,4,8.50);
 
 
--- ------------------------------------------------------------
--- STUNDENRAPPORT  (~600 rows via generate_series)
--- ------------------------------------------------------------
 INSERT INTO stundenrapport (mitarbeiter_id, baustelle_id, datum, stunden, taetigkeit)
 SELECT
     ((g - 1) % 14) + 1 AS mitarbeiter_id,
@@ -193,9 +169,6 @@ SELECT
 FROM generate_series(1, 600) AS g;
 
 
--- ------------------------------------------------------------
--- MATERIALVERBRAUCH  (~150 rows)
--- ------------------------------------------------------------
 INSERT INTO materialverbrauch (baustelle_id, material_id, menge, datum, vorgefertigt)
 SELECT
     ((g - 1) % 30) + 1 AS baustelle_id,
@@ -210,9 +183,6 @@ SELECT
 FROM generate_series(1, 150) AS g;
 
 
--- ------------------------------------------------------------
--- Sanity check
--- ------------------------------------------------------------
 SELECT 'kunde' AS tabelle, COUNT(*) AS anzahl FROM kunde
 UNION ALL SELECT 'projekt',           COUNT(*) FROM projekt
 UNION ALL SELECT 'baustelle',         COUNT(*) FROM baustelle
@@ -222,3 +192,4 @@ UNION ALL SELECT 'material',          COUNT(*) FROM material
 UNION ALL SELECT 'material_lieferant',COUNT(*) FROM material_lieferant
 UNION ALL SELECT 'stundenrapport',    COUNT(*) FROM stundenrapport
 UNION ALL SELECT 'materialverbrauch', COUNT(*) FROM materialverbrauch;
+

@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS materialverbrauch CASCADE;C
 
-REATE TABLE materialverbrauch (
+CREATE TABLE materialverbrauch (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     baustelle_id BIGINT NOT NULL REFERENCES baustelle(id) ON DELETE CASCADE,
     material_id BIGINT NOT NULL REFERENCES material(id) ON DELETE RESTRICT,

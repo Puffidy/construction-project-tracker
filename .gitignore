@@ -19,3 +19,11 @@ build/
 # Logs
 *.log
 npm-debug.log*
+
+# Database Client extension artifacts
+.dbclient/
+
+# Python (occasional scripts)
+__pycache__/
+*.pyc
+.venv/
